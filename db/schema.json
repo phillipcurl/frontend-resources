@@ -1,0 +1,27 @@
+{
+
+  "migration_id": 2016030501234028,
+
+  "models": {
+
+    "Resource": {
+
+      "table": "resources",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "collection_id", "type": "int", "properties": {}},
+        {"name": "title", "type": "string", "properties": {}},
+        {"name": "description", "type": "string", "properties": {}},
+        {"name": "url", "type": "string", "properties": {}},
+        {"name": "source", "type": "string", "properties": {}},
+        {"name": "tags", "type": "string", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    }
+
+  }
+
+}

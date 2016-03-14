@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  {{= this.partial('head.html') }}
+  <body>
+    <header>
+      <div>
+        <h1 class="window-text">Front-End Resources</h1>
+        <!-- <h2>This is the subheader. Yada, yada, yada.</h2> -->
+      </div>
+    </header>
+    <nav class="navigation">
+      <ul class="navigation-list ul-reset">
+        <li class="navigation-item ib">
+          <a href="http://localhost:3000" class="navigation-link">
+            All
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=CSS" class="navigation-link">
+            CSS
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=JavaScript" class="navigation-link">
+            JavaScript
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=React" class="navigation-link">
+            React
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Angular" class="navigation-link">
+            Angular
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Ember" class="navigation-link">
+            Ember
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Elm" class="navigation-link">
+            Elm
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Meteor" class="navigation-link">
+            Meteor
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Polymer" class="navigation-link">
+            Polymer
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Newsletters" class="navigation-link">
+            Newsletters
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Books" class="navigation-link">
+            Books
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Podcasts" class="navigation-link">
+            Podcasts
+          </a>
+        </li>
+        <li class="navigation-item ib">
+          <a href="/?tags=Other" class="navigation-link">
+            Other
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      {{= this.child() }}
+    </div>
+    <button class="fab" type="button" onclick="$('html, body').animate({scrollTop:0}, 400);" style="display:none;">
+      <i class="fa fa-arrow-up fa-fw fa-2x"></i>
+    </button>
+    <footer class="footer">
+      <div class="wrapper">
+        <article class="content-article">
+          <p>
+            <strong>Pellentesque habitant morbi tristique</strong>
+            senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+            <em>Aenean ultricies mi vitae est.</em>
+            Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed,
+            <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
+            <a href="#">Donec non enim</a>
+            in turpis pulvinar facilisis. Ut felis.</p>
+        </article>
+      </div>
+    </footer>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:800' rel='stylesheet' type='text/css'>
+    <link href="https://opensource.keycdn.com/fontawesome/4.5.0/font-awesome.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script>
+      $(document).ready(function() {
+
+        $(window).scroll(function() {
+          //if you hard code, then use console
+          //.log to determine when you want the
+          //nav bar to stick.
+          console.log($(window).scrollTop())
+          if ($(window).scrollTop() > $('header').outerHeight()) {
+            $('.navigation').addClass('navigation-fixed');
+            $('body').css('padding-top', $('.navigation').outerHeight());
+            $('.fab').show();
+          }
+          if ($(window).scrollTop() < $('header').outerHeight()) {
+            $('.navigation').removeClass('navigation-fixed');
+            $('body').css('padding-top', 0);
+            $('.fab').hide();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

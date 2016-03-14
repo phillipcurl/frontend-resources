@@ -1,0 +1,27 @@
+{
+  "name": "frontend-resources",
+  "version": "0.0.0",
+  "description": "frontend-resources",
+  "author": "Phillip Curl",
+  "main": "server.js",
+  "engines": {
+    "node": "4.2.4"
+  },
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "dot": "^1.0.3",
+    "nodal": "0.7.10",
+    "request": "^2.69.0",
+    "validator": "^5.1.0"
+  },
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "mocha": "~2.4.5"
+  },
+  "scripts": {
+    "test": "mocha ./test/runner.js",
+    "start": "node cluster.js",
+    "worker": "node worker.js"
+  },
+  "private": true
+}
