@@ -6,7 +6,7 @@ module.exports = (function() {
   const doT = require('dot');
   const Resource = Nodal.require('app/models/resource.js');
   const fs = require('fs');
-  require.extensions['.html'] = function (module, filename) {
+  require.extensions['.html'] = function(module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');
   };
   const resourcesTemplate = Nodal.require('app/templates/resources.html');
@@ -28,40 +28,23 @@ module.exports = (function() {
         .orderBy('title', 'ASC')
         .limit(100)
         .end((err, models) => {
-
           /**
            * TODO: This should not throw a 404. Instead it should render a template
            * that lets the user know the data was not retrieved
            */
           if (err) {
-
             this.status(404);
-
             this.render(Nodal.Template.generate('error/404.html').render(this.params));
-
           }
 
-          let renderedResources = '';
-
-          let keys = Object.keys( models )
-             .forEach(function( key, i ) {
-
-               let currentResource = models[key];
-               if (!currentResource._data) {
-                 console.log('item does not have a _data object');
-               } else {
-                 if (currentResource._data.title) {
-                   renderedResources += tempFn(currentResource._data);
-                 }
-               }
-             });
+          let resourcesMarkup = getRenderedResources(models);
 
           this.render(
             Nodal.Template.generate('layout.html', 'index.html').render(
               this.params, {
                 test: this.params.query.test,
                 name: 'Front-End Resources',
-                resources: renderedResources
+                resources: resourcesMarkup
               }
             )
           );
@@ -69,6 +52,24 @@ module.exports = (function() {
         });
 
     }
+
+  }
+
+  function getRenderedResources(resources) {
+    let renderedResources = '';
+
+    let keys = Object.keys(resources).forEach(function(key, i) {
+      let currentResource = resources[key];
+      if (!currentResource._data) {
+        console.log('item does not have a _data object');
+      } else {
+        if (currentResource._data.title) {
+          renderedResources += tempFn(currentResource._data);
+        }
+      }
+    });
+
+    return renderedResources;
 
   }
 

@@ -21,7 +21,7 @@ module.exports = (function() {
   // scheduler.minutely(0).perform(CrawlerTask);
   // scheduler.minutely(10).perform(CrawlerTask2);
   // scheduler.minutely(20).perform(CrawlerTask3);
-  //scheduler.minutely(30).perform(CrawlerTask4);
+  // scheduler.minutely(30).perform(CrawlerTask4);
 
   /* generator: end tasks */
 
