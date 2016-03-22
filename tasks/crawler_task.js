@@ -20,8 +20,6 @@ module.exports = (function() {
     }
     newResource.tags = tagText;
 
-    //console.log(newResource);
-
     Resource.create(newResource, (err, model) => {
       console.log((err || model));
     });

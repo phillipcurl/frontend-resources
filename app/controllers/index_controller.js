@@ -4,6 +4,7 @@ module.exports = (function() {
 
   const Nodal = require('nodal');
   const doT = require('dot');
+  const Trianglify = require('trianglify');
   const Resource = Nodal.require('app/models/resource.js');
   const fs = require('fs');
   require.extensions['.html'] = function(module, filename) {
@@ -22,10 +23,9 @@ module.exports = (function() {
   class IndexController extends Nodal.Controller {
 
     get() {
-
       Resource.query()
         .where(this.params.query)
-        .orderBy('title', 'ASC')
+        .orderBy('created_at', 'ASC')
         .limit(100)
         .end((err, models) => {
           /**
@@ -36,9 +36,7 @@ module.exports = (function() {
             this.status(404);
             this.render(Nodal.Template.generate('error/404.html').render(this.params));
           }
-
           let resourcesMarkup = getRenderedResources(models);
-
           this.render(
             Nodal.Template.generate('layout.html', 'index.html').render(
               this.params, {
@@ -48,16 +46,12 @@ module.exports = (function() {
               }
             )
           );
-
         });
-
     }
-
   }
 
   function getRenderedResources(resources) {
     let renderedResources = '';
-
     let keys = Object.keys(resources).forEach(function(key, i) {
       let currentResource = resources[key];
       if (!currentResource._data) {
@@ -68,9 +62,7 @@ module.exports = (function() {
         }
       }
     });
-
     return renderedResources;
-
   }
 
   return IndexController;

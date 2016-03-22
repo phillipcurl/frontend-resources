@@ -1,15 +1,15 @@
-<div class="resource">
+
+<div class="resource tile">
   <a href="{{=it.url}}" target="_blank">
     <h3 class="resource-title">{{=it.title}}</h3>
   </a>
-  <small class="resource-source"><p>
-    Source:
-      {{=it.source}}
-  </small></p>
+  <div style="margin-bottom: 5px;">
+    <a href="/?tags={{=it.tags}}">
+      <span class="resource-tag">{{=it.tags}}</span>
+    </a>
+  </div>
+  <p class="resource-source"><small>{{=it.source}}</small></p>
   <p class="resource-description">{{=it.description}}</p>
-  <a href="/?tags={{=it.tags}}">
-    <span class="resource-tag">{{=it.tags}}</span>
-  </a>
   <!-- <div>
     <a href="{{=it.url}}" title="{{=it.url}}" target="_blank">
       <i class="fa fa-link"></i>

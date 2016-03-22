@@ -2,7 +2,7 @@
 <html>
   {{= this.partial('head.html') }}
   <body>
-    <header>
+    <header class="background-img">
       <div>
         <h1 class="window-text">Front-End Resources</h1>
         <!-- <h2>This is the subheader. Yada, yada, yada.</h2> -->
@@ -77,13 +77,13 @@
         </li>
       </ul>
     </nav>
-    <div class="wrapper">
+    <div class="tile-container">
       {{= this.child() }}
     </div>
     <button class="fab" type="button" onclick="$('html, body').animate({scrollTop:0}, 400);" style="display:none;">
       <i class="fa fa-arrow-up fa-fw fa-2x"></i>
     </button>
-    <footer class="footer">
+    <footer class="footer background-img">
       <div class="wrapper">
         <article class="content-article">
           <p>
@@ -101,8 +101,63 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:800' rel='stylesheet' type='text/css'>
     <link href="https://opensource.keycdn.com/fontawesome/4.5.0/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+    <script src="../static/js/jquery.colourBrightness.min.js"></script>
     <script>
       $(document).ready(function() {
+
+        var pattern = Trianglify({
+          cell_size: 65,
+          variance: 1,
+          x_colors: 'random',
+          y_colors: 'match_x',
+          palette: Trianglify.colorbrewer,
+          color_space: 'lab',
+          color_function: false,
+          stroke_width: 1.51,
+          width: 1600,
+          height: 800,
+          seed: null
+        });
+
+        var patternSvg = pattern.svg();
+
+        // Serialize the SVG object to a String
+        var serialiazedPattern = new XMLSerializer().serializeToString(patternSvg);
+
+        var patternHtml = patternSvg.children[0].outerHTML;
+        var patternColor = $(patternHtml).attr('fill');
+
+        // Perform the base64 encoding of the String
+        var base64Pattern = window.btoa(serialiazedPattern);
+
+        //var patternPng = pattern.png();
+
+        //console.log(patternPng);
+
+        $('.background-img').css('background', 'url("data:image/svg+xml;base64,' + base64Pattern + '") no-repeat center center fixed');
+
+        $('.resource-tag').css('background-color', patternColor);
+        $('.resource-tag').colourBrightness();
+        $('.fab').css('background-color', patternColor);
+        $('.fab').colourBrightness();
+        $('.resource-source').css('color', patternColor);
+
+        // $(".resource-title").hover(function() {
+        //   $(this).css('color', patternColor)
+        // });
+
+        $('.navigation-link').mouseover(function() {
+          $(this).css('color', patternColor);
+        }).mouseout(function() {
+          $(this).css('color', 'black');
+        });
+
+        $('.resource-title').mouseover(function() {
+          $(this).css('color', patternColor);
+        }).mouseout(function() {
+          $(this).css('color', 'black');
+        });
 
         $(window).scroll(function() {
           //if you hard code, then use console
@@ -111,11 +166,13 @@
           console.log($(window).scrollTop())
           if ($(window).scrollTop() > $('header').outerHeight()) {
             $('.navigation').addClass('navigation-fixed');
+            // $('.navigation').css('background-color', patternColor);
             $('body').css('padding-top', $('.navigation').outerHeight());
             $('.fab').show();
           }
           if ($(window).scrollTop() < $('header').outerHeight()) {
             $('.navigation').removeClass('navigation-fixed');
+            // $('.navigation').css('background-color', '#ffffff');
             $('body').css('padding-top', 0);
             $('.fab').hide();
           }
